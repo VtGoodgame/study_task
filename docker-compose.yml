@@ -1,11 +1,15 @@
 version: '3.8'
-
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./app/dockerfile
+      cache_from:
+        - study_task-app:latest
     container_name: study_task_app
-    restart: always 
+    ports:
+      - "9090:9090"
     environment:
       - api_version=VERSION
+    volumes:
+      - ./app:/app

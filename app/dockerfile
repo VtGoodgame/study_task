@@ -2,12 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Сначала копируем только зависимости — так Docker закэширует этот слой
-# и не будет переустанавливать пакеты при каждом изменении кода
-COPY requirements.txt .
+COPY app/requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Теперь копируем весь остальной код
-COPY . .
+# Копируем содержимое папки app (на хосте) в /app (в контейнере)
+COPY app/ . 
 
-CMD ["python", "main.py"]
+CMD ["python3", "main.py"]

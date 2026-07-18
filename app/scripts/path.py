@@ -1,28 +1,31 @@
 from pathlib import Path
 
-def collect_files_up_to_root(root_folder_name: str = "study_task") -> list[dict]:
+def collect_files_up_to_root(root_folder_name: str = "app") -> list[dict]:
     """
-    Начинает с текущей рабочей директории и поднимается вверх (через parent),
-    на каждом уровне собирая имена и расширения файлов.
-    Останавливается, дойдя до директории с именем root_folder_name (включительно).
+    Рекурсивно собирает все файлы в директории и ее поддиректориях.
+    Исключает системные файлы и возвращает пути относительно корня.
     """
-    current = Path.cwd()
+    # Находим корневую папку
+    root_path = Path.cwd()
+    while root_path.name != root_folder_name and root_path.parent != root_path:
+        root_path = root_path.parent
+    
     files_list = []
-
-    while True:
-        for item in current.iterdir():
-            if item.is_file():
-                files_list.append({
-                    "name": item.name, #полное имя файла с расширением
-                    "dir": str(current), #полный путь к директории, где находится файл
-                })
-
-        if current.name == root_folder_name:
-            break
-
-        if current.parent == current:
-            break
-
-        current = current.parent
-
+    
+    for item in root_path.rglob('*'):
+        if not item.is_file():
+            continue
+        
+        # Пропускаем системные файлы
+        if (item.name.startswith('.') or 
+            item.name.startswith('__') or 
+            item.suffix in ['.pyc', '.pyo', '.pyd']):
+            continue
+        
+        files_list.append({
+            "name": item.name,
+            "dir": str(item.parent),
+            "relative_path": str(item.relative_to(root_path)),
+        })
+    
     return files_list
