@@ -2,8 +2,7 @@ import asyncio
 from fastapi import APIRouter  
 from scripts import path
 
-router = APIRouter(
-    prefix="/files",            
+router = APIRouter(        
     tags=["files"]
 )
 
