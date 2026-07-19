@@ -11,8 +11,6 @@ python3 -m venv .venv
 
 source .venv/bin/activate
 
-cd study_task/app
-
 pip install -r requirements.txt
 
-python main.py
+python main.py 

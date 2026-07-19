@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./app/dockerfile
+      dockerfile: ./app/Dockerfile 
       cache_from:
         - study_task-app:latest
     container_name: study_task_app
