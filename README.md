@@ -16,7 +16,7 @@ study_task/
 │   ├── .dockerignore            # Docker образ для приложения
 │   ├── requirements.txt         # Python зависимости
 │   │
-│   ├── routers/                 # Обработчики источников вакансий
+│   ├── routers/                 
 │   │   ├── files.py             # router возвращающий список файлов текущего проекта через Python.
 │   │   ├── health.py            # router для проверки состояния сервера
 │   │   └── version.py           # router возвращающий версию апи
