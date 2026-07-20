@@ -10,6 +10,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - api_version=VERSION
+      - APP_PORT = APP_PORT  
+      - VERSION = VERSION
     volumes:
       - ./app:/app
