@@ -8,5 +8,6 @@ router = APIRouter(
 @router.get("/getversion", status_code=status.HTTP_200_OK,
            summary="Получить актуальную версию API")
 async def get_version():
-    return {"version": VERSION,
+    
+    return {"version": VERSION if VERSION else "1.0",
             "version_info": "Version details"}
